@@ -1,112 +1,111 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1,maximum-scale=1,user-scalable=no"
-    />
-    <title>
-      Extent Finder
-    </title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
-      crossorigin="anonymous" />
-    <link rel="stylesheet"
-      href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css" />
-    <link rel="stylesheet" href="https://jsdev.arcgis.com/4.18/esri/themes/dark-blue/main.css" />
-    
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
-    
-    <script
-      src="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/js/calcite-web.min.js"></script>
-    
-    <script src="https://jsdev.arcgis.com/4.18/"></script>
-    <script src="./app.js"></script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>
+    Extent Finder
+  </title>
 
-  <body>
-    <div style="height: 100%">
-      <div class="divPanel" id="panelDiv">
-        <div class="panel modifier-class">
-          <h4 class="trailer-half" id="panelTitle">
-            Interact with the map to get the extent
-          </h4>
-        </div>
-        <div style="padding-left: 10px;">
-          <h6 class="sr-title">WGS84&ensp;
-            <span>
-              <a class="tooltip modifier-class" aria-label="Copy to clipboard">
-                <i class="copy icon" id="wgsCopyBtn" style="cursor: pointer;"></i>
-                <small><i id="clipboardText"></i></small>
-              </a>
-            </span>
-          </h6>
-          <p id="geographicExtentDiv"></p>
-          <hr />
-          <h6 class="sr-title">Web Mercator&ensp;
-            <span>
-              <a class="tooltip modifier-class" aria-label="Copy to clipboard">
-                <i class="copy icon" id="mercatorCopyBtn" style="cursor: pointer;"></i>
-                <small><i id="clipboardText2"></i></small>
-              </a>
-            </span>
-          </h6>
-          <!-- textarea needed to be able to copy to clipboar -->
-          <!-- https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard -->
-          <p id="mercatorExtentDiv"></p>
-          <hr />
-          <h6 class="sr-title">View parameters&ensp;
-            <span>
-              <a class="tooltip modifier-class" aria-label="Copy to clipboard">
-                <i class="copy icon" id="centerCopyBtn" style="cursor: pointer;"></i>
-                <small><i id="clipboardText3"></i></small>
-              </a>
-            </span>
-          </h6>
-          <p id="viewParams">
-            const view = new <span id="viewSpan"></span> ({<br />
-            &ensp;container: "viewDiv",<br />
-            &ensp;map: map,<br />
-            &ensp;center: <span id="centerDiv"></span>,<br />
-            &ensp;zoom: <span id="zoomDiv"></span><span id="trailingComma" style="visibility: hidden;">,</span>
-            <span id="cameraDiv"></span>
-            });
-          </p>
-          <hr />
-          <textarea id="copyDiv" rows="5" cols="25"></textarea>
-        </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet"
+    href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css" />
+  <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/dark-blue/main.css" />
+
+  <link rel="stylesheet" type="text/css" href="./styles.css" />
+
+  <script
+    src="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/js/calcite-web.min.js"></script>
+
+  <script src="https://js.arcgis.com/4.18/"></script>
+  <script src="./app.js"></script>
+</head>
+
+<body>
+  <div style="height: 100%">
+    <div class="divPanel" id="panelDiv">
+      <div class="panel modifier-class">
+        <h4 class="trailer-half" id="panelTitle">
+          Interact with the map to get the extent
+        </h4>
       </div>
-      <div class="divBase" id="viewDiv"></div>
-      <div id="infoDiv" class="infoDiv">
-        <input class="esri-component esri-widget--button esri-widget esri-interactive" type="button" id="switch-btn"
-          value="3D" />
-      </div>
-      <div class="infoDiv2">
-        <button class="esri-icon-locate esri-component esri-widget--button esri-widget esri-interactive"
-          id="centerBtn"></button>
-      </div>
-      <!-- add data div -->
-      <div class="infoDiv3">
-        <button class="esri-icon-upload esri-component esri-widget--button esri-widget esri-interactive"
-          id="addDataBtn"></button>
-      </div>
-      <div class="infoDiv4 add-layer-div input-group" id="layerInputDiv" style="visibility: hidden;">
-        <label style="color: white; font-weight: bold;">
-          Add Map or Feature Service with layer id
-          <input id="addLayerInput" type="text" placeholder="ex: https://.../arcgis/rest/services/USA/MapServer/3"
-            class="modifier-class input-group-input" required>
-          <div id="inputError" class="input-error-message"></div>
-          <span class="input-group-button">
-            <button class="btn" id="addLayerBtn">Add Layer</button>
+      <div style="padding-left: 10px;">
+        <h6 class="sr-title">WGS84&ensp;
+          <span>
+            <a class="tooltip modifier-class" aria-label="Copy to clipboard">
+              <i class="copy icon" id="wgsCopyBtn" style="cursor: pointer;"></i>
+              <small><i id="clipboardText"></i></small>
+            </a>
           </span>
-        </label>
+        </h6>
+        <p id="geographicExtentDiv"></p>
+        <hr />
+        <h6 class="sr-title">Web Mercator&ensp;
+          <span>
+            <a class="tooltip modifier-class" aria-label="Copy to clipboard">
+              <i class="copy icon" id="mercatorCopyBtn" style="cursor: pointer;"></i>
+              <small><i id="clipboardText2"></i></small>
+            </a>
+          </span>
+        </h6>
+        <!-- textarea needed to be able to copy to clipboar -->
+        <!-- https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard -->
+        <p id="mercatorExtentDiv"></p>
+        <hr />
+        <h6 class="sr-title">View parameters&ensp;
+          <span>
+            <a class="tooltip modifier-class" aria-label="Copy to clipboard">
+              <i class="copy icon" id="centerCopyBtn" style="cursor: pointer;"></i>
+              <small><i id="clipboardText3"></i></small>
+            </a>
+          </span>
+        </h6>
+        <p id="viewParams">
+          const view = new <span id="viewSpan"></span> ({<br />
+          &ensp;container: "viewDiv",<br />
+          &ensp;map: map,<br />
+          &ensp;center: <span id="centerDiv"></span>,<br />
+          &ensp;zoom: <span id="zoomDiv"></span><span id="trailingComma" style="visibility: hidden;">,</span>
+          <span id="cameraDiv"></span>
+          });
+        </p>
+        <hr />
+        <textarea id="copyDiv" rows="5" cols="25"></textarea>
       </div>
-      
     </div>
-    
+    <div class="divBase" id="viewDiv"></div>
+    <div id="infoDiv" class="infoDiv">
+      <input class="esri-component esri-widget--button esri-widget esri-interactive" type="button" id="switch-btn"
+        value="3D" />
     </div>
-    
-  </body>
+    <div class="infoDiv2">
+      <button class="esri-icon-locate esri-component esri-widget--button esri-widget esri-interactive"
+        id="centerBtn"></button>
+    </div>
+    <!-- add data div -->
+    <div class="infoDiv3">
+      <button class="esri-icon-upload esri-component esri-widget--button esri-widget esri-interactive"
+        id="addDataBtn"></button>
+    </div>
+    <div class="infoDiv4 add-layer-div input-group" id="layerInputDiv" style="visibility: hidden;">
+      <label style="color: white; font-weight: bold;">
+        Add Map or Feature Service with layer id
+        <input id="addLayerInput" type="text" placeholder="ex: https://.../arcgis/rest/services/USA/MapServer/3"
+          class="modifier-class input-group-input" required>
+        <div id="inputError" class="input-error-message"></div>
+        <span class="input-group-button">
+          <button class="btn" id="addLayerBtn">Add Layer</button>
+        </span>
+      </label>
+    </div>
+
+  </div>
+
+  </div>
+
+</body>
+
 </html>
