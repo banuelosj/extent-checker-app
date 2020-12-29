@@ -6,6 +6,8 @@ This application helps users obtain extents or map centers, and copy the values 
 
 ## How to use the application
 
+To use the app, just zoom and pan around the `Map`. There are event listeners on `MapView` `extent` and `zoom` properties. The coordinates will update on the left panel. A user can click on the blue copy icons to copy the text to the clipboard. A user can then paste the text directly to their app.
+
 This application has the ability to toggle between 2D and 3D views. When switching to a 3D `SceneView`, the view parameters will include the `camera` and its parameters (`heading`, `tilt`, `fov`, and `position`).
 
 This application has the ability to add data to the `Map` in the form of a `FeatureLayer`, and zoom to the layer's extent. This allows users to zoom to their data's extent immediatley, then modify it to fit their application's needs.
