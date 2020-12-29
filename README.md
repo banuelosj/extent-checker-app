@@ -6,10 +6,11 @@ This application helps users obtain extents or map centers, and copy the values 
 
 ## How to use the application
 
-This application has the ability to toggle between 2D and 3D views. When switching to a 3D `SceneView`, the view parameters will include the `camera` and its parameters (`heading`, `tilt`, `fov`, and `position`);
+This application has the ability to toggle between 2D and 3D views. When switching to a 3D `SceneView`, the view parameters will include the `camera` and its parameters (`heading`, `tilt`, `fov`, and `position`).
 
 This application has the ability to add data to the `Map` in the form of a `FeatureLayer`, and zoom to the layer's extent. This allows users to zoom to their data's extent immediatley, then modify it to fit their application's needs.
-Note: Only map or feature services with a layer id can be used, as a `FeatureLayer` can only be created from either of these two service types.
+
+*Note: Only map or feature services with a layer id can be used, as a `FeatureLayer` can only be created from either of these two service types.*
 
 A user can switch between `basemaps` using the `BasemapGallery` widget. The app includes a `Search` widget, so a user can zoom to a specific address instead of manually zooming and panning to the location.
 
