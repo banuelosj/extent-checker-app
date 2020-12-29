@@ -1,0 +1,78 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+.divBase {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 70%;
+}
+.divPanel {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 30%;
+  overflow: scroll;
+}
+#panelDiv {
+  float: left;
+}
+#viewDiv {
+  float: right;
+}
+
+.sr-title {
+  color: darkgreen;
+  font-weight: bold;
+}
+
+p {
+  margin: 0;
+}
+
+hr {
+  margin: 10px;
+}
+
+.infoDiv {
+  position: absolute;
+  top: 55px;
+  right: 15px;
+}
+
+.infoDiv2 {
+  position: absolute;
+  top: 95px;
+  right: 15px;
+}
+
+.infoDiv3 {
+  position: absolute;
+  top: 135px;
+  right: 15px;
+}
+
+.infoDiv4 {
+  position: absolute;
+  top: 175px;
+  right: 15px;
+}
+
+.infoDiv input {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+}
+
+.infoDiv2 button {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+}
+
+.add-layer-div {
+  background-color: black;
+  padding: 10px;
+  width: 400px;
+}
