@@ -69,6 +69,7 @@ require([
 
   const map = new Map({
     basemap: "streets-navigation-vector",
+    ground: "world-elevation",
    // basemap: "arcgis-community", // needs valid api-key
     layers: [graphicsLayer]
   });
